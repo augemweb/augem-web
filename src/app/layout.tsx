@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -56,8 +57,9 @@ function SEOJsonLd() {
     openingHours: "Mo-Fr 09:00-19:00",
     description:
       "Tasación y certificación de joyas, diamantes y gemas. Informes periciales claros, objetivos y con validez legal para particulares, aseguradoras y despachos.",
-    sameAs: [], // añade perfiles cuando los tengas
+    sameAs: [],
   };
+
   return (
     <script
       type="application/ld+json"
@@ -66,9 +68,28 @@ function SEOJsonLd() {
   );
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="es">
+      <head>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-WRTQB6QCM1"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-WRTQB6QCM1');
+          `}
+        </Script>
+      </head>
       <body>
         {children}
         {/* Datos estructurados globales */}
